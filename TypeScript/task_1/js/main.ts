@@ -1,0 +1,30 @@
+interface Teacher {
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
+  location: string;
+  [propName: string]: any;
+}
+
+const teacher1: Teacher = {
+  firstName: "Alice",
+  lastName: "Wonderland",
+  fullTimeEmployee: true,
+  yearsOfExperience: 10,
+  location: "Paris",
+  contract: true,
+  specialization: "Math",
+  numberOfCourses: 5
+};
+
+const teacher2: Teacher = {
+  firstName: "Bob",
+  lastName: "The Builder",
+  fullTimeEmployee: false,
+  location: "London",
+  hourlyRate: 50,
+};
+
+console.log("Teacher 1:", teacher1);
+console.log("Teacher 2:", teacher2);
