@@ -19,59 +19,27 @@ const student2: Student = {
     location: 'Los Angeles'
 };
 
-const studentsList: Student[] = [student1, student2];
-console.log(studentsList);
+const studentsList = [student1, student2];
 
-const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
+const table = document.createElement("table");
+table.innerHTML = `
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+`;
 
-const table: HTMLTableElement = document.createElement("table");
-const tableHead: HTMLTableSectionElement = document.createElement("thead");
-const tableBody: HTMLTableSectionElement = document.createElement("tbody");
-const headRow: HTMLTableRowElement = document.createElement("tr");
-const firstNameHeader: HTMLTableCellElement = document.createElement("th");
-const locationHeader: HTMLTableCellElement = document.createElement("th");
-
-firstNameHeader.textContent = "First Name";
-locationHeader.textContent = "Location";
-
-headRow.appendChild(firstNameHeader);
-headRow.appendChild(locationHeader);
-
-tableHead.appendChild(headRow);
-
-table.appendChild(tableHead);
-
+const tbody = table.querySelector("tbody")!;
 studentsList.forEach((student) => {
-  const row: HTMLTableRowElement = document.createElement("tr");
-  const firstNameCell: HTMLTableCellElement = document.createElement("td");
-  const locationCell: HTMLTableCellElement = document.createElement("td");
-
-  firstNameCell.textContent = student.firstName;
-  locationCell.textContent = student.location;
-
-  row.appendChild(firstNameCell);
-  row.appendChild(locationCell);
-  tableBody.appendChild(row);
+    const row = document.createElement("tr");
+    row.innerHTML = `
+    <td>${student.firstName}</td>
+    <td>${student.location}</td>
+  `;
+    tbody.appendChild(row);
 });
 
-table.appendChild(tableBody);
-body.appendChild(table);
-
-const styleSheet = document.createElement("style");
-styleSheet.type = "text/css";
-styleSheet.innerText = `
-  table {
-    width: 80%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  th, td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
-  }
-  th {
-    background-color: #f2f2f2;
-  }
-`;
-document.head.appendChild(styleSheet);
+document.body.appendChild(table);
